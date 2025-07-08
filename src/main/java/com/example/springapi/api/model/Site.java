@@ -7,7 +7,7 @@ import java.util.Objects;
 
 
 /**
- * A class to represent air monitoring sites.
+ * A class to represent static air monitoring site metadata.
  * Each site has a unique system code number and
  * map coordinates
  */
@@ -29,7 +29,7 @@ public class Site {
 
     /**
      * Constructor for uni testing and manual instantiation
-     * @param systemCodeNumber unique indentifier for each site
+     * @param systemCodeNumber unique identifier for each site
      */
     public Site(String systemCodeNumber, double latitude, double longitude) {
         this.systemCodeNumber = systemCodeNumber;
