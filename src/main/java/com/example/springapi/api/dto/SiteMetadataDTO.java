@@ -1,7 +1,7 @@
 package com.example.springapi.api.dto;
 
 /**
- * Data Transfer Object (DTO) for deserializing static site metadata
+ * Data Transfer Object for deserializing static site metadata
  * received from external Flask web service.
  * Maps json fields to java Site fields
  */
