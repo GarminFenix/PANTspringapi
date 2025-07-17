@@ -1,11 +1,13 @@
 package com.example.springapi.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 /**
  * Data Transfer Object for deserializing static site metadata
  * received from external Flask web service.
  * Maps json fields to java Site fields
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SiteMetadataDTO {
     private String systemCodeNumber;
     private double lat;

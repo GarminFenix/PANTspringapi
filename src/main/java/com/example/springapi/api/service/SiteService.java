@@ -5,7 +5,10 @@ import com.example.springapi.api.repository.SiteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.PrecisionModel;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,6 +75,7 @@ public class SiteService {
      * Deletes a site
      * @param systemCodeNumber unique identifier
      */
+    @Transactional
     public void deleteSite(String systemCodeNumber) {
         siteRepository.deleteBySystemCodeNumber(systemCodeNumber);
     }
@@ -87,4 +91,26 @@ public class SiteService {
                 .map(Site::getSystemCodeNumber)
                 .toList();
     }
+
+    /**
+     * One-time patch method to backfill geometry for sites missing a location.
+     * This is useful after switching to JTS Point and correcting coordinate mapping.
+     * Iterates over all sites and sets a geometry field using lat/lon if it's null.
+     */
+    @Transactional
+    public void backfillMissingGeometry() {
+        GeometryFactory gf = new GeometryFactory(new PrecisionModel(), 4326);
+
+        List<Site> allSites = getAllSites();
+        allSites.stream()
+                .filter(site -> site.getLocation() == null)
+                .forEach(site -> {
+                    Point location = gf.createPoint(new Coordinate(site.getLongitude(), site.getLatitude()));
+                    site.setLocation(location);
+                    siteRepository.save(site); // persist updated geometry
+                });
+
+        System.out.println("📍 Geometry backfill complete.");
+    }
+
 }
