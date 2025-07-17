@@ -11,12 +11,13 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 /**
  * Component that runs on application startup to fetch static site metadata
- * from the external Flask web service and synchronize it with the database.
+ * from the web service and synchronize it with the database.
+ * Preserves existing dynamic_readings by avoiding deletions and instead
+ * updating lat/lon and geometry where necessary.
  */
 @Component
 public class StaticSiteDataLoader {
@@ -33,10 +34,9 @@ public class StaticSiteDataLoader {
     }
 
     /**
-     * Fetches site metadata from the web service on startup and synchronizes it with the database.
-     * - Inserts new sites
-     * - Skips existing ones
-     * - Deletes any sites no longer present in the upstream source
+     * Fetches site metadata from the Flask web service and synchronizes it
+     * with the database. Any missing geometry is backfilled without deleting
+     * or overwriting dependent dynamic readings.
      */
     @EventListener(ApplicationReadyEvent.class)
     public void fetchAndStoreSiteMetadata() {
@@ -47,25 +47,21 @@ public class StaticSiteDataLoader {
                     .map(dto -> new Site(dto.getSystemCodeNumber(), dto.getLat(), dto.getLon()))
                     .toList();
 
-            Set<String> incomingCodes = incomingSites.stream()
-                    .map(Site::getSystemCodeNumber)
-                    .collect(Collectors.toSet());
+            incomingSites.forEach(incoming -> {
+                Optional<Site> existingOpt = siteService.getSiteBySystemCodeNumber(incoming.getSystemCodeNumber());
 
-            List<String> existingCodes = siteService.getAllSystemCodeNumbers();
+                if (existingOpt.isPresent()) {
+                    Site existing = existingOpt.get();
+                    existing.setLatitude(incoming.getLatitude());
+                    existing.setLongitude(incoming.getLongitude());
+                    siteService.createSite(existing); // updates with new coords
+                } else {
+                    siteService.createSite(incoming); // insert new site
+                }
+            });
 
-            // Delete stale sites
-            existingCodes.stream()
-                    .filter(code -> !incomingCodes.contains(code))
-                    .forEach(siteService::deleteIfExists);
-
-            // Insert new sites
-            incomingSites.forEach(site ->
-                    siteService.getSiteBySystemCodeNumber(site.getSystemCodeNumber())
-                            .ifPresentOrElse(
-                                    existing -> {}, // skip
-                                    () -> siteService.createSite(site)
-                            )
-            );
+            // Patch any geometry that wasn't set before. One off
+            siteService.backfillMissingGeometry();
         }
     }
 }

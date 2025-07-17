@@ -28,9 +28,12 @@ public class DynamicController {private final DynamicReadingService dynamicReadi
         this.siteRepository = siteRepository;
     }
 
+
+
+
     /**
      * Endpoint to receive web service dynamic air quality push notifications.
-     */
+    **/
     @PostMapping("/receive")
     public ResponseEntity<Void> receiveDynamicData(@RequestBody PollutionPushPayloadDTO payload) {
         System.out.println("Received dynamic data push"); //debugging
@@ -62,4 +65,27 @@ public class DynamicController {private final DynamicReadingService dynamicReadi
         return ResponseEntity.ok().build();
     }
 
+
+
+    /**
+     * Debuggin to print json payload
+
+    @PostMapping("/receive")
+    public ResponseEntity<Void> receiveDynamicData(@RequestBody PollutionPushPayloadDTO payload) {
+        System.out.println("✅ Received payload from Flask");
+
+        // Log one dynamic record for debugging
+        payload.getNotifications().forEach(notification -> {
+            notification.getNotificationData().forEach(siteReadingDTO -> {
+                siteReadingDTO.getDynamics().forEach(dto -> {
+                    System.out.println("🧪 Sample reading:");
+                    System.out.println("CO: " + dto.getCo());
+                    System.out.println("Last updated: " + dto.getLastUpdated());
+                });
+            });
+        });
+
+        return ResponseEntity.ok().build();
+    }
+**/
 }

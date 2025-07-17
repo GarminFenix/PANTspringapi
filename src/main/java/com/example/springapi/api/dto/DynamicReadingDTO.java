@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Data Transfer Object for deserialsing each site's actual environmental metrics (ie
  * pollution data and timestamp) json data received from Flask web service
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class DynamicReadingDTO {
     private Double battery;
     private Double co;

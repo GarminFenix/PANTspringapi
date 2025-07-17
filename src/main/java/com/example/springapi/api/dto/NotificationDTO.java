@@ -1,12 +1,14 @@
 package com.example.springapi.api.dto;
 
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Data Transfer Object for deserialsing incoming notification block
  * of json data received from Flask web service
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NotificationDTO {
     private String subscription;
     private String action;

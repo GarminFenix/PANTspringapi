@@ -27,7 +27,7 @@ public class PollutionSubscriber {
     @EventListener(ApplicationReadyEvent.class)
     public void subscribeToPollutionData(){
         Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("notificationUrl", "https://05004b4d187f.ngrok-free.app/api/pollution/receive");
+        requestBody.put("notificationUrl", "https://viable-terminally-barnacle.ngrok-free.app/api/pollution/receive");
         requestBody.put("subscriptions", List.of("AIR QUALITY DYNAMIC") );
 
         HttpHeaders headers = new HttpHeaders();
