@@ -36,6 +36,15 @@ public class DynamicReadingService {
     }
 
     /**
+     * Deletes all readings from dynamic readings table on startup.
+     * Ensures old values from previous simulations are wiped.
+     */
+    public void deleteAllReadings(){
+        dynamicReadingRepository.deleteAll();
+    }
+
+
+    /**
      * Creates a new dynamic reading for specified site, or updates it if more recent.
      *
      * @param systemCodeNumber unique identifier
@@ -51,6 +60,8 @@ public class DynamicReadingService {
         }
 
         return dynamicReadingRepository.save(newReading);
+
+
     }
 
 

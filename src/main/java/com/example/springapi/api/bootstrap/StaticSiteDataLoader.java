@@ -26,7 +26,7 @@ public class StaticSiteDataLoader {
     private final RestTemplate restTemplate = new RestTemplate();
 
     private static final String METADATA_URL =
-            "https://airdatageneration-fmhnbdh7cheee4ae.ukwest-01.azurewebsites.net/pollutiondata/sitemetadata";
+            "https://airdatageneration.azurewebsites.net/pollutiondata/sitemetadata";
 
     @Autowired
     public StaticSiteDataLoader(SiteService siteService) {
