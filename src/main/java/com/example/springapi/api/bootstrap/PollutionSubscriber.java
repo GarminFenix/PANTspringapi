@@ -1,5 +1,6 @@
 package com.example.springapi.api.bootstrap;
 
+import com.example.springapi.api.service.DynamicReadingService;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpEntity;
@@ -22,10 +23,24 @@ import java.util.Map;
 public class PollutionSubscriber {
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private static final String SUBSCRIBE_URL = "https://airdatageneration-fmhnbdh7cheee4ae.ukwest-01.azurewebsites.net/pollutiondata/subscribe";
+    private static final String SUBSCRIBE_URL = "https://airdatageneration.azurewebsites.net/pollutiondata/subscribe";
+    private final DynamicReadingService dynamicReadingService;
+
+    public PollutionSubscriber(DynamicReadingService dynamicReadingService) {
+        this.dynamicReadingService = dynamicReadingService;
+    }
 
     @EventListener(ApplicationReadyEvent.class)
     public void subscribeToPollutionData(){
+        // Clear previous readings
+        try {
+            dynamicReadingService.deleteAllReadings();
+            System.out.println("Previous simulation readings deleted.");
+        } catch (Exception e) {
+            System.out.println("Error: failed to delete previous simulation readings.");
+        }
+
+        // Subscribe to pollution data
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("notificationUrl", "https://viable-terminally-barnacle.ngrok-free.app/api/pollution/receive");
         requestBody.put("subscriptions", List.of("AIR QUALITY DYNAMIC") );
