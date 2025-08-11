@@ -21,7 +21,7 @@ import java.util.Optional;
 public class SiteController {
 
     @Autowired
-    private SiteService siteService;
+    SiteService siteService;
 
 
     /**
