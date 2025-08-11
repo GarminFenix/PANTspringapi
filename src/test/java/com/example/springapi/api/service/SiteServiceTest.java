@@ -68,7 +68,7 @@ class SiteServiceTest {
 
     /**
      * Tests creation of a new site.
-     * Verifies that the site is saved using {@link SiteRepository#save(Site)}.
+     * Verifies that the site is saved using {@link SiteRepository#save}.
      */
     @Test
     void testCreateSite() {
