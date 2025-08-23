@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 /**
  * Data Transfer Object for deserializing static site metadata
  * received from external Flask web service.
- * Maps json fields to java Site fields
+ * Maps JSON fields to java Site fields
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)

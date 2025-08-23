@@ -35,7 +35,7 @@ public class DynamicReadingRepositoryTest {
         site.setSystemCodeNumber("SITE001");
         site.setLatitude(59.9);
         site.setLongitude(10.8);
-        siteRepository.saveAndFlush(site); // ✅ Flush to persist immediately
+        siteRepository.saveAndFlush(site);
 
         // Create and save older reading
         DynamicReading olderReading = new DynamicReading();

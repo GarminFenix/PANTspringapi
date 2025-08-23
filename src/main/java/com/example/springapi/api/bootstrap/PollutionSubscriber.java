@@ -14,6 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+import static com.example.springapi.api.bootstrap.NgrokConfig.NGROK_URL_SPRING_SUB;
+import static com.example.springapi.api.bootstrap.NgrokConfig.NGROK_URL_WEB_SERVICE;
+
 /**
  * Component that runs on start up to subscribe for pollution data
  * updates every 60 seconds
@@ -23,7 +27,7 @@ import java.util.Map;
 public class PollutionSubscriber {
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private static final String SUBSCRIBE_URL = "https://airdatageneration.azurewebsites.net/pollutiondata/subscribe";
+    private static final String SUBSCRIBE_URL = NGROK_URL_WEB_SERVICE + "/pollutiondata/subscribe";
     private final DynamicReadingService dynamicReadingService;
 
     public PollutionSubscriber(DynamicReadingService dynamicReadingService) {
@@ -42,7 +46,7 @@ public class PollutionSubscriber {
 
         // Subscribe to pollution data
         Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("notificationUrl", "https://viable-terminally-barnacle.ngrok-free.app/api/pollution/receive");
+        requestBody.put("notificationUrl", NGROK_URL_SPRING_SUB);
         requestBody.put("subscriptions", List.of("AIR QUALITY DYNAMIC") );
 
         HttpHeaders headers = new HttpHeaders();

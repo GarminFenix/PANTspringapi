@@ -17,7 +17,8 @@ import org.locationtech.jts.geom.PrecisionModel;
 /**
  * A class to represent static air monitoring site metadata.
  * Each site has a unique system code number and
- * map coordinates
+ * map coordinates.
+ *
  */
 
 @Entity
@@ -26,12 +27,14 @@ public class Site {
 
     @Id
     private String systemCodeNumber;
-
     private double latitude;
     private double longitude;
 
 
-    // A column to store PostGIS geometry, converted from lat/long
+    /**
+     * PostGIS-compatible geometry column storing the site's location as a Point.
+     * Uses SRID 4326 (WGS 84) for global GPS coordinates.
+     */
     @Column(columnDefinition = "geometry(Point,4326)")
     private Point location;
 
@@ -41,13 +44,17 @@ public class Site {
     public Site(){}
 
     /**
-     * Constructor for uni testing and manual instantiation
-     * @param systemCodeNumber unique identifier for each site
+     * Constructor for unit testing and manual instantiation
+     * @param systemCodeNumber unique site identifier
+     * @param latitude latitude in decimal degrees
+     * @param longitude longitude in decimal degrees
      */
     public Site(String systemCodeNumber, double latitude, double longitude) {
         this.systemCodeNumber = systemCodeNumber;
         this.latitude = latitude;
         this.longitude = longitude;
+
+        // Create point geometry
         GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
         this.location = geometryFactory.createPoint(new Coordinate(longitude, latitude));
     }

@@ -19,7 +19,8 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api/pollution")
-public class DynamicController {private final DynamicReadingService dynamicReadingService;
+public class DynamicController {
+    private final DynamicReadingService dynamicReadingService;
     private final SiteRepository siteRepository;
 
     @Autowired
@@ -29,21 +30,28 @@ public class DynamicController {private final DynamicReadingService dynamicReadi
     }
 
 
-
-
     /**
      * Endpoint to receive web service dynamic air quality push notifications.
+     * @param payload the incoming data payload containing site readings
+     * @return HTTP 200 OK if processed successfully
     **/
     @PostMapping("/receive")
     public ResponseEntity<Void> receiveDynamicData(@RequestBody PollutionPushPayloadDTO payload) {
         System.out.println("Received dynamic data push"); //debugging
+
+        // Iterate through each notification
         payload.getNotifications().forEach(notification -> {
+
+            // Iterate through each site
             notification.getNotificationData().forEach(siteReadingDTO -> {
                 String scn = siteReadingDTO.getSystemCodeNumber();
                 Optional<Site> siteOpt = siteRepository.findBySystemCodeNumber(scn);
 
+                // If a site is in the database
                 if (siteOpt.isPresent()) {
                     Site site = siteOpt.get();
+
+                    // Convert each DTO into a DynamicReading entity and persist it
                     for (DynamicReadingDTO dto : siteReadingDTO.getDynamics()) {
                         DynamicReading reading = new DynamicReading();
                         reading.setSite(site);
@@ -56,6 +64,7 @@ public class DynamicController {private final DynamicReadingService dynamicReadi
                         reading.setBattery(dto.getBattery());
                         reading.setLastUpdated(dto.getLastUpdated());
 
+                        // Upsert the latest reading for the site
                         dynamicReadingService.upsertLatestReading(scn, reading);
                     }
                 }
@@ -64,28 +73,4 @@ public class DynamicController {private final DynamicReadingService dynamicReadi
 
         return ResponseEntity.ok().build();
     }
-
-
-
-    /**
-     * Debuggin to print json payload
-
-    @PostMapping("/receive")
-    public ResponseEntity<Void> receiveDynamicData(@RequestBody PollutionPushPayloadDTO payload) {
-        System.out.println("✅ Received payload from Flask");
-
-        // Log one dynamic record for debugging
-        payload.getNotifications().forEach(notification -> {
-            notification.getNotificationData().forEach(siteReadingDTO -> {
-                siteReadingDTO.getDynamics().forEach(dto -> {
-                    System.out.println("🧪 Sample reading:");
-                    System.out.println("CO: " + dto.getCo());
-                    System.out.println("Last updated: " + dto.getLastUpdated());
-                });
-            });
-        });
-
-        return ResponseEntity.ok().build();
-    }
-**/
 }
