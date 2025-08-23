@@ -54,11 +54,8 @@ Flutter Front End
    git clone https://github.com/GarminFenix/PANTspringapi.git
    cd PANTspringapi
    ```
-2. Set environment variables in PowerShell before running
-   $env:DB_USERNAME = "your_username"
-   $env:DB_PASSWORD = "your_password"
-   $env:NGROK_URL_WEB_SERVICE = "your_web_service_ngrok"
-   $env:NGROK_URL_SPRING_SUB = "your_spring_sub_nrgok"
+2. Set environment variables are hardcoded.
+   
    
 3. Run
     ```bash

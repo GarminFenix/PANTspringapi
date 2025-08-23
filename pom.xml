@@ -85,6 +85,7 @@
             <scope>test</scope>
         </dependency>
 
+
         <!-- In memory database for testing-->
         <dependency>
             <groupId>com.h2database</groupId>
@@ -101,10 +102,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.5.3</version>
-                <configuration>
-                    <mainClass>com.example.springapi.SpringapiApplication</mainClass>
-                </configuration>
+
             </plugin>
         </plugins>
     </build>
