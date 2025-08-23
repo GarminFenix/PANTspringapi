@@ -59,7 +59,11 @@ Flutter Front End
    $env:DB_PASSWORD = "your_password"
    $env:NGROK_URL_WEB_SERVICE = "your_web_service_ngrok"
    $env:NGROK_URL_SPRING_SUB = "your_spring_sub_nrgok"
-   .\mvnw spring-boot:run 
+   
+3. Run
+    ```bash
+    .\mvnw spring-boot:run 
+    ```
 
 ---
 
