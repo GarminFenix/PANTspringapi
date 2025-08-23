@@ -10,6 +10,7 @@ import java.util.Optional;
 /**
  * Repository interface for accessing and managing dynamic data
  * entities
+ * @author Ross Cochrane
  */
 
 @Repository

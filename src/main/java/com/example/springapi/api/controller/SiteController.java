@@ -13,8 +13,8 @@ import java.util.Optional;
 /**
  * REST controller for managing Site entities.
  * Handles HTTP requests for creating, retrieving and deleting
+ * @author Ross Cochrane
  */
-
 
 @RestController
 @RequestMapping("/api/sites")

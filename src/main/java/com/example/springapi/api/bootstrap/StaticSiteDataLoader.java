@@ -18,6 +18,7 @@ import static com.example.springapi.api.bootstrap.NgrokConfig.NGROK_URL_WEB_SERV
  * from the web service and synchronize it with the database.
  * Preserves existing dynamic_readings by avoiding deletions and instead
  * updating lat/lon and geometry where necessary.
+ * @author Ross Cochrane
  */
 @Component
 public class StaticSiteDataLoader {

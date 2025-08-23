@@ -21,6 +21,7 @@ import static com.example.springapi.api.bootstrap.NgrokConfig.NGROK_URL_WEB_SERV
 /**
  * Component that runs on start up to subscribe for pollution data
  * updates every 60 seconds
+ * @author Ross Cochrane
  */
 
 @Component

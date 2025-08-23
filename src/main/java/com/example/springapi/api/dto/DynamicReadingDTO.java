@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 /**
  * Data Transfer Object for deserialsing each site's actual environmental metrics (ie
  * pollution data and timestamp) json data received from Flask web service
+ * @author Ross Cochrane
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
