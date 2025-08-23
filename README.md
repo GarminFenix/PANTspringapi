@@ -113,19 +113,3 @@ DELETE  /api/sites/{systemCodeNumber}   Delete a site
   ```  
 
 ---
-
-## To-Do / Cleanup List
-
-- Externalize **NGROK URLs** into `application.properties` or env vars (remove `NgrokConfig` constants).
-- Secure **environment secrets** (DB creds, API keys) via env vars or CI/CD secrets—remove any hardcoded values.
-- Remove **commented-out code** and **`System.out.println`** debugging statements; adopt SLF4J logging.
-- Add **Swagger/OpenAPI** (`springdoc-openapi`) for interactive API docs.
-- Ensure **DTO → entity mapping** strips JTS `Point` from JSON payloads or reintroduce Jackson JTS module when exposing geometry.
-- Improve and finalize **Javadoc** on controllers and services.
-- Commit a minimal `.env.example` (without real secrets) and add `.env` to `.gitignore`.
-- Standardize **error handling** with `@ControllerAdvice` for consistent 4xx/5xx responses.
-- Consider adding **Spring Security** to lock down internal CRUD endpoints.
-
----
-
-*This README.md reflects the current codebase and outlines immediate cleanup and enhancement steps before final submission.*
