@@ -94,7 +94,7 @@ public class SiteService {
 
     /**
      * One-time patch method to backfill geometry for sites missing a location.
-     * This is useful after switching to JTS Point and correcting coordinate mapping.
+     * Implemented after switching to JTS Point and correcting coordinate mapping.
      * Iterates over all sites and sets a geometry field using lat/lon if it's null.
      */
     @Transactional

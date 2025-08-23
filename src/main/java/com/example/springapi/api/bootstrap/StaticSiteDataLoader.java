@@ -8,10 +8,10 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import static com.example.springapi.api.bootstrap.NgrokConfig.NGROK_URL_WEB_SERVICE;
 
 /**
  * Component that runs on application startup to fetch static site metadata
@@ -26,7 +26,7 @@ public class StaticSiteDataLoader {
     private final RestTemplate restTemplate = new RestTemplate();
 
     private static final String METADATA_URL =
-            "https://airdatageneration.azurewebsites.net/pollutiondata/sitemetadata";
+            NGROK_URL_WEB_SERVICE + "/pollutiondata/sitemetadata";
 
     @Autowired
     public StaticSiteDataLoader(SiteService siteService) {
@@ -59,6 +59,9 @@ public class StaticSiteDataLoader {
                     siteService.createSite(incoming); // insert new site
                 }
             });
+
+            System.out.println("Metadata sync initiated...");
+            System.out.println("Site metadata successfully downloaded");
 
             // Patch any geometry that wasn't set before. One off
             siteService.backfillMissingGeometry();
