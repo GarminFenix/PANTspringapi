@@ -52,7 +52,7 @@ Flutter Front End
 1. Clone the repo
    ```bash
    git clone https://github.com/GarminFenix/PANTspringapi.git
-   cd springapi
+   cd PANTspringapi
    ```
 2. Set environment variables in PowerShell before running
    $env:DB_USERNAME = "your_username"
