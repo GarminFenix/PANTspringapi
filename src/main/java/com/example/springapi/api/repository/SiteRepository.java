@@ -8,6 +8,7 @@ import java.util.Optional;
 
 /**
  * Repository interface for accessing and managing Site entities.
+ * @author Ross Cochrane
  */
 
 @Repository

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 /**
  * Data Transfer Object for deserialsing site level json data ie system code number
  * and list of environmental metrics received from Flask web service
+ * @author Ross Cochrane
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)

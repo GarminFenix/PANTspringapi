@@ -14,6 +14,7 @@ import java.util.Optional;
 
 /**
  * Service layer for managing Site entities.
+ * @author Ross Cochrane
  */
 @Service
 public class SiteService {

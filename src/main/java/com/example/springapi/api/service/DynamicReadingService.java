@@ -10,6 +10,7 @@ import java.util.Optional;
 
 /**
  * Service layer for managing dynamic reading entities
+ * @author Ross Cochrane
  */
 @Service
 public class DynamicReadingService {

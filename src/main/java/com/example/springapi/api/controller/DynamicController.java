@@ -16,6 +16,7 @@ import java.util.Optional;
 /**
  * REST controller for handling dynamic air quality data
  * notifications
+ * @author Ross Cochrane
  */
 @RestController
 @RequestMapping("/api/pollution")

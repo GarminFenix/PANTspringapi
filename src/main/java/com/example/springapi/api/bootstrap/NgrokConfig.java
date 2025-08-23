@@ -4,6 +4,7 @@ package com.example.springapi.api.bootstrap;
  * Configuration class for storing NGROK URLs used in the application.
  * These URLs are typically temporary and used for tunneling local services
  * to the public internet during development or testing.
+ * @author Ross Cochrane
  */
 public class NgrokConfig {
 

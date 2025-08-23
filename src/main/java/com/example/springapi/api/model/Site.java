@@ -11,14 +11,11 @@ import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.PrecisionModel;
 
-
-
-
 /**
  * A class to represent static air monitoring site metadata.
  * Each site has a unique system code number and
  * map coordinates.
- *
+ *@author Ross Cochrane
  */
 
 @Entity

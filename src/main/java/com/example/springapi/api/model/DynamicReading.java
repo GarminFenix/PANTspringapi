@@ -11,6 +11,7 @@ import java.time.ZonedDateTime;
  * Includes pollution and environmental metrics, timestamp
  * and is joined to the site meta data (Site model class) (ie map coordinates)
  * via the system code number
+ * @author Ross Cochrane
  */
 
 @Entity
