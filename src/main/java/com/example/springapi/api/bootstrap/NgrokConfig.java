@@ -20,5 +20,5 @@ public class NgrokConfig {
      * This is the callback URL that external services will use to push updates.
      */
     public static final String NGROK_URL_SPRING_SUB =
-            "https://viable-terminally-barnacle.ngrok-free.app/api/pollution/receive";
+            "http://127.0.0.1:8080/api/pollution/receive";
 }
