@@ -13,7 +13,7 @@ public class NgrokConfig {
      * This URL allows external clients to access the local web service.
      */
     public static final String NGROK_URL_WEB_SERVICE =
-            "https://d0186d6393b5.ngrok-free.app";
+            "http://127.0.0.1:8182";
 
     /**
      * NGROK endpoint used by the Spring application to receive pollution data.
