@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.example.springapi"},{"l":"com.example.springapi.api.bootstrap"},{"l":"com.example.springapi.api.controller"},{"l":"com.example.springapi.api.dto"},{"l":"com.example.springapi.api.model"},{"l":"com.example.springapi.api.repository"},{"l":"com.example.springapi.api.service"}];updateSearchResults();
