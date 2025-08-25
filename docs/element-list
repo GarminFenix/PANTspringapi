@@ -1,0 +1,7 @@
+com.example.springapi
+com.example.springapi.api.bootstrap
+com.example.springapi.api.controller
+com.example.springapi.api.dto
+com.example.springapi.api.model
+com.example.springapi.api.repository
+com.example.springapi.api.service
