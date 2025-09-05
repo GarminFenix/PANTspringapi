@@ -7,10 +7,10 @@ on startup and exposes internal CRUD for site management.
 Developed by Ross Cochrane as part of a submission for MSc Software Development
 dissertation.
 Part of Pollution Avoidance Navigation Tool (PANT):
-Flask Pollution Data Generation Web Service
-Spring API (This)
-Flask API
-Flutter Front End
+Flask Pollution Data Generation Web Service,
+Spring API (This),
+Flask API,
+Flutter Front End.
 
 ---
 
